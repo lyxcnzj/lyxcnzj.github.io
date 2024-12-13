@@ -31,7 +31,8 @@
       { "outbound": "any", "server": "defaultDns", "disable_cache": true },
       { "clash_mode": "direct", "server": "localDns" },
       { "clash_mode": "global", "server": "proxyDns" },
-      { "rule_set": ["geosite-cn", "Diy_Direct", "Diy_Talkatone"], "server": "localDns" },
+      { "rule_set": "geosite-cn", "server": "localDns" },
+      { "rule_set": "Diy_Direct", "server": "defaultDns" },
       { "rule_set": ["geosite-geolocation-!cn", "Diy_Proxy"], "server": "proxyDns" }
     ],
     "final": "localDns",
@@ -89,6 +90,7 @@
         "final": "漏网之鱼",
     "rules": [
       { "type": "logical", "mode": "or", "rules": [{ "port": 53 }, { "protocol": "dns" }], "outbound": "dns-out" },
+      { "type": "logical", "mode": "or", "rules": [{ "protocol": "quic" }], "outbound": "block" },
       { "clash_mode": "direct", "outbound": "全球直连" },
       { "clash_mode": "global", "outbound": "GLOBAL" },
       { "domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"], "outbound": "全球直连" },
@@ -104,13 +106,12 @@
       { "rule_set": ["geoip-netflix", "geosite-netflix"], "outbound": "Netflix" },
       { "rule_set": ["geoip-telegram", "geosite-telegram"], "outbound": "Telegram" },
       { "rule_set": ["geosite-geolocation-!cn", "Diy_Proxy"], "outbound": "节点选择" },
-      { "rule_set": ["geoip-cn", "geosite-cn", "Diy_Direct", "Diy_Talkatone"], "outbound": "全球直连" }
+      { "rule_set": ["geoip-cn", "geosite-cn", "Diy_Direct",], "outbound": "全球直连" }
     ],
     
     "rule_set": [
       { "tag": "Diy_Proxy", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox.json", "download_detour": "全球直连" },
       { "tag": "Diy_Direct", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/lyxcnzj/my_rules/refs/heads/main/Direct.json", "download_detour": "全球直连" },
-      { "tag": "Diy_Talkatone", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/lyxcnzj/my_rules/refs/heads/main/Talkatone.json", "download_detour": "全球直连" },
       { "tag": "Diy_Ads-Rule", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/lyxcnzj/my_rules/refs/heads/main/AdBlock.json", "download_detour": "全球直连" },
       { "tag": "AWAvenue-Ads-Rule", "type": "remote", "format": "source", "url": "https://ghp.ci/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox.json", "download_detour": "全球直连" },
       { "tag": "geosite-chat", "type": "remote", "format": "binary", "url": "https://ghp.ci/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs", "download_detour": "全球直连" },
